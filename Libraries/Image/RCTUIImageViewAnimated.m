@@ -269,12 +269,14 @@ static NSUInteger RCTDeviceFreeMemory() {
 }
 
 #pragma mark - CALayerDelegate
-
+//https://github.com/facebook/react-native/commit/123423c2a9258c9af25ca9bffe1f10c42a176bf3
 - (void)displayLayer:(CALayer *)layer
 {
   if (_currentFrame) {
     layer.contentsScale = self.animatedImageScale;
     layer.contents = (__bridge id)_currentFrame.CGImage;
+  } else {
+    [super displayLayer:layer]; //Fix image cannot show in iOS 14
   }
 }
 
